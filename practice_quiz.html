@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Data-Driven Cyber Defence | Practice Quiz | Anand Jagadeesh (AJ)</title>
+  <link rel="icon" href="favicons/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/practice_quiz.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><img class="brand-icon" src="favicons/favicon.png" alt="" aria-hidden="true"><span><a class="brand-home" href="index.html">Data-Driven Cyber Defence</a><small><a href="https://anandj.xyz">Anand Jagadeesh (AJ)</a></small></span></div>
+  <div class="quiz-tools" aria-label="Quiz controls">
+    <button class="btn" type="button" id="resetQuiz" data-shortcut="r" aria-keyshortcuts="r" title="Restart quiz (r)" aria-label="Restart quiz">↻</button>
+    <button class="btn" type="button" id="hintToggle" data-shortcut="h" aria-keyshortcuts="h" aria-pressed="true" title="Disable hints (h)" aria-label="Disable hints">?</button>
+    <button class="btn" type="button" id="timerToggle" data-shortcut="v" aria-keyshortcuts="v" aria-expanded="false" aria-controls="timerPanel" title="Show timer (v)" aria-label="Show timer">◷</button>
+    <span class="timer-panel" id="timerPanel" hidden>
+      <span class="pace" id="quizPace" aria-label="Quiz elapsed time"><b id="quizClock">00:00</b><span> / 10:00</span></span>
+      <button class="btn" type="button" id="timerBtn" data-shortcut="p" aria-keyshortcuts="p" title="Start timer (p)" aria-label="Start timer">▷</button>
+    </span>
+  </div>
+  <button class="btn theme-btn" id="themeSwitch" data-shortcut="t" aria-keyshortcuts="t" aria-label="Switch to dark theme" title="Switch theme (t)">☼</button>
+</header>
+<main id="app" aria-live="polite"></main>
+<script src="js/practice_quiz.js"></script>
+</body>
+</html>

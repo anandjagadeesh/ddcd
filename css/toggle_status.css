@@ -1,0 +1,12 @@
+.btn.toggle-status[aria-pressed="true"]:not(.ghost),
+.btn.toggle-status[aria-expanded="true"]:not(.ghost){
+  background:color-mix(in srgb,var(--g-t) 20%,var(--surface2));
+  border-color:var(--g-t);
+  color:var(--text);
+}
+.btn.toggle-status[aria-pressed="false"]:not(.ghost),
+.btn.toggle-status[aria-expanded="false"]:not(.ghost){
+  background:color-mix(in srgb,var(--m-t) 20%,var(--surface2));
+  border-color:var(--m-t);
+  color:var(--text);
+}

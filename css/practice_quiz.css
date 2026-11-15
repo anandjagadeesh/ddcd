@@ -33,7 +33,7 @@ body{display:flex;flex-direction:column;min-height:100vh;height:100vh;height:100
 .btn.theme-btn{width:32px;height:32px;min-width:32px;margin:0;padding:0;display:grid;place-items:center;font-size:17px;line-height:1}
 .top button.btn,.top a.btn{width:36px;height:36px;min-width:36px;padding:0;border-radius:50%;display:grid;place-items:center}
 .quiz-tools{display:flex;align-items:center;gap:8px;margin-left:auto}
-.top .quiz-tools button.btn{width:32px;height:32px;min-width:32px;min-height:32px;padding:0;border:1px solid var(--line);border-radius:50%;background:var(--surface2);color:var(--text);display:grid;place-items:center}
+.top .quiz-tools button.btn{width:36px;height:36px;min-width:36px;min-height:36px;padding:0;border:1px solid var(--line);border-radius:50%;background:var(--surface2);color:var(--text);font-size:14px;font-weight:400;display:grid;place-items:center}
 .timer-panel{display:flex;align-items:center;gap:8px}
 .timer-panel[hidden]{display:none}
 .pace{font-family:var(--mono);font-size:13px;color:var(--muted);padding:0 4px;white-space:nowrap}

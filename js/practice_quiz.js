@@ -51,13 +51,14 @@ var Q=[
 ];
 var TOPIC={data:["Detection data","t-data"],resp:["Response choices","t-resp"],human:["People and AI","t-human"],mat:["Maturity and threats","t-mat"]};
 var root=document.documentElement,app=document.getElementById('app');
-var S={order:[],i:0,ans:{},shuffleOn:true,hintOn:true,hintShown:false,done:false,pool:[]};
+var S={order:[],i:0,ans:{},shuffleOn:true,hintOn:true,hintShown:false,done:false,pool:[],timeTaken:0};
 var timer={running:false,elapsed:0,last:0,tick:null};
 
 /* theme */
 var themeButton=document.getElementById('themeSwitch');
 function setTheme(t,save){root.setAttribute('data-theme',t);
-  themeButton.textContent=t==='dark'?'☾':'☼';
+  themeButton.textContent=t==='dark'?'☼':'☾';
+  themeButton.setAttribute('aria-pressed',t==='dark'?'true':'false');
   themeButton.setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');
   themeButton.setAttribute('title',t==='dark'?'Switch to light theme (t)':'Switch to dark theme (t)');
   if(save){try{localStorage.setItem('dd-theme',t)}catch(e){}}}
@@ -67,7 +68,9 @@ function setTheme(t,save){root.setAttribute('data-theme',t);
 themeButton.onclick=function(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark',true)};
 
 var hintToggle=document.getElementById('hintToggle');
+var shuffleToggle=document.getElementById('shuffleToggle');
 function syncHintToggle(){
+  hintToggle.textContent='?';
   hintToggle.setAttribute('aria-pressed',S.hintOn?'true':'false');
   hintToggle.setAttribute('aria-label',(S.hintOn?'Disable':'Enable')+' hints');
   hintToggle.title=(S.hintOn?'Disable':'Enable')+' hints (h)';
@@ -77,6 +80,15 @@ function toggleHints(){
   if(document.getElementById('qt'))showQ();
 }
 hintToggle.onclick=toggleHints;
+
+function syncShuffleToggle(){
+  shuffleToggle.setAttribute('aria-pressed',S.shuffleOn?'true':'false');
+}
+function toggleShuffle(){
+  S.shuffleOn=!S.shuffleOn;
+  syncShuffleToggle();
+}
+shuffleToggle.onclick=toggleShuffle;
 
 function formatTime(seconds){
   seconds=Math.max(0,Math.floor(seconds));
@@ -93,25 +105,22 @@ function updateTimer(){
   pace.title=delta< -30?'Under 10-minute target by '+formatTime(-delta):delta>30?'Over 10-minute target by '+formatTime(delta):'On pace';
 }
 function setTimerRunning(running){
-  var button=document.getElementById('timerBtn');
   if(running===timer.running)return;
   if(running){timer.running=true;timer.last=Date.now();timer.tick=setInterval(updateTimer,500);}
   else{timer.elapsed+=timer.last?(Date.now()-timer.last)/1000:0;timer.last=0;timer.running=false;clearInterval(timer.tick);}
-  button.textContent=running?'Ⅱ':'▷';
-  button.title=(running?'Pause':'Start')+' timer (p)';
-  button.setAttribute('aria-label',(running?'Pause':'Start')+' timer');
   updateTimer();
 }
-document.getElementById('timerToggle').onclick=function(){
-  var panel=document.getElementById('timerPanel'),open=panel.hidden;
+function setTimerPanelOpen(open){
+  var panel=document.getElementById('timerPanel'),toggle=document.getElementById('timerToggle');
   panel.hidden=!open;
-  this.setAttribute('aria-expanded',open?'true':'false');
-  this.title=(open?'Hide':'Show')+' timer (v)';
-  this.setAttribute('aria-label',(open?'Hide':'Show')+' timer');
-};
-document.getElementById('timerBtn').onclick=function(){setTimerRunning(!timer.running);};
+  toggle.setAttribute('aria-expanded',open?'true':'false');
+  toggle.title=(open?'Hide':'Show')+' timer (v)';
+  toggle.setAttribute('aria-label',(open?'Hide':'Show')+' timer');
+}
+document.getElementById('timerToggle').onclick=function(){setTimerPanelOpen(document.getElementById('timerPanel').hidden);};
 document.getElementById('resetQuiz').onclick=function(){
   setTimerRunning(false);timer.elapsed=0;timer.last=0;updateTimer();
+  S.timeTaken=0;
   intro();
 };
 
@@ -119,17 +128,19 @@ function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
 
 function intro(){
-  app.innerHTML='<section class="intro"><h1>Practice quiz</h1>'+
-  '<p>Twelve new questions on the same ideas as the talk and the simulation. You get an answer and a short reason after every question. These are not the questions of the real quiz.</p>'+
+  app.innerHTML='<section class="intro"><h1>Check Your Knowledge (CYK)</h1>'+
+  '<p>Twelve questions on the same ideas as the talk and the simulation. You get an answer and a short reason after every question. This is a practice question set.</p>'+
   '<div class="facts"><div class="fact"><b>12</b><span>questions</span></div><div class="fact"><b>~10 min</b><span>to finish</span></div><div class="fact"><b>4</b><span>topics scored</span></div></div>'+
-  '<div class="opts-set"><label><input type="checkbox" id="oShuf" checked> Shuffle question and answer order</label></div>'+
   '<div class="row"><button class="btn" id="go">Start the quiz</button></div>'+
-  '<p class="muted" style="margin-top:16px;font-size:14px">Keys: <span class="kbd">1</span>–<span class="kbd">4</span> or <span class="kbd">a</span>–<span class="kbd">d</span> choose an answer, <span class="kbd">h</span> toggle hints, <span class="kbd">v</span> show timer, <span class="kbd">p</span> start/pause timer, <span class="kbd">r</span> restart, <span class="kbd">Enter</span> next.</p></section>';
+  '<p class="muted" style="margin-top:16px;font-size:14px">Keys: <span class="kbd">1</span>–<span class="kbd">4</span> or <span class="kbd">a</span>–<span class="kbd">d</span> choose an answer, <span class="kbd">h</span> toggle hints, <span class="kbd">s</span> toggle shuffle, <span class="kbd">v</span> show timer, <span class="kbd">r</span> restart, <span class="kbd">o</span> show/hide Defendasaurus, <span class="kbd">Enter</span> next.</p></section>';
   document.getElementById('go').onclick=function(){
-    S.shuffleOn=document.getElementById('oShuf').checked;
     start(Q.map(function(_,i){return i}));};
 }
 function start(idx){
+  if(timer.running)setTimerRunning(false);
+  timer.elapsed=0;timer.last=0;S.timeTaken=0;
+  setTimerRunning(true);
+  setTimerPanelOpen(true);
   S.pool=idx.slice();S.order=S.shuffleOn?shuf(idx):idx.slice();S.i=0;S.ans={};S.hintShown=false;S.done=false;
   S.opt={};S.order.forEach(function(qi){var n=Q[qi].c.length,o=[];for(var k=0;k<n;k++)o.push(k);S.opt[qi]=S.shuffleOn?shuf(o):o;});
   showQ();
@@ -160,10 +171,13 @@ function showQ(){
   var hb=document.getElementById('hint');if(hb)hb.onclick=function(){S.hintShown=true;showQ();var x=app.querySelector('.choice');if(x)x.focus();};
   var nb=document.getElementById('next');if(nb){nb.onclick=next;nb.focus();}
 }
-function pick(oi){var qi=S.order[S.i];if(S.ans[qi]!==undefined)return;S.ans[qi]=oi;showQ();}
+function pick(oi){var qi=S.order[S.i];if(S.ans[qi]!==undefined)return;S.ans[qi]=oi;
+  document.dispatchEvent(new CustomEvent('practice-quiz:answer',{detail:{correct:oi===Q[qi].a}}));
+  showQ();}
 function next(){if(S.i+1<S.order.length){S.i++;S.hintShown=false;showQ();window.scrollTo(0,0);}else results();}
 function results(){
   if(timer.running)setTimerRunning(false);
+  S.timeTaken=timer.elapsed;
   S.done=true;var n=S.order.length,right=0,by={},miss=[];
   S.order.forEach(function(qi){var d=Q[qi];by[d.t]=by[d.t]||{r:0,n:0};by[d.t].n++;
     if(S.ans[qi]===d.a){right++;by[d.t].r++;}else miss.push(qi);});
@@ -171,7 +185,7 @@ function results(){
   if(pct>=90)msg='Excellent. You are ready for the real quiz.';
   else if(pct>=70)msg='Good. Review the topics below that are marked in orange.';
   else msg='A useful start. Go through the explanations again, then retry the missed questions.';
-  var h='<section class="card"><span class="tag t-mat">Results</span><div class="score">'+right+' / '+n+'</div><p><b>'+pct+'%.</b> '+msg+'</p><div class="topics">';
+  var h='<section class="card"><span class="tag t-mat">Results</span><div class="score">'+right+' / '+n+'</div><p><b>'+pct+'%.</b> '+msg+'</p><p><b>Time taken:</b> '+formatTime(S.timeTaken)+'</p><div class="topics">';
   Object.keys(TOPIC).forEach(function(k){if(!by[k])return;var b=by[k],p=Math.round(b.r/b.n*100);
     h+='<div class="topic'+(p<70?' low':'')+'"><b>'+TOPIC[k][0]+'</b><span>'+b.r+' / '+b.n+'</span><div class="meter"><i style="width:'+p+'%"></i></div></div>';});
   h+='</div><div class="row">';
@@ -191,8 +205,8 @@ document.addEventListener('keydown',function(ev){
   if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT')return;
   if(ev.key.toLowerCase()==='t'){ev.preventDefault();themeButton.click();return;}
   if(ev.key.toLowerCase()==='h'){ev.preventDefault();toggleHints();return;}
+  if(ev.key.toLowerCase()==='s'&&document.getElementById('shuffleToggle')){ev.preventDefault();toggleShuffle();return;}
   if(ev.key.toLowerCase()==='v'){ev.preventDefault();document.getElementById('timerToggle').click();return;}
-  if(ev.key.toLowerCase()==='p'){ev.preventDefault();document.getElementById('timerBtn').click();return;}
   if(ev.key.toLowerCase()==='r'){ev.preventDefault();document.getElementById('resetQuiz').click();return;}
   if(S.done||!S.order.length||!document.getElementById('qt'))return;
   var qi=S.order[S.i],k=ev.key.toLowerCase(),answered=S.ans[qi]!==undefined;

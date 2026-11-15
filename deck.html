@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Data-Driven Cyber Defence | Presentation Deck | Anand Jagadeesh (AJ)</title>
+<title>Stories in Data-Driven Cyber Defence | Presentation Deck | Anand Jagadeesh (AJ)</title>
 <link rel="icon" href="favicons/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
@@ -15,6 +15,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Open+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/deck.css">
+<link rel="stylesheet" href="css/toggle_status.css">
+<link rel="stylesheet" href="css/defendasaurus.css">
 </head>
 <body>
 
@@ -22,22 +24,22 @@
   <div class="brand"><img class="brand-icon" src="favicons/favicon.png" alt="" aria-hidden="true"><a class="brand-home" href="index.html">Data-Driven Cyber Defence</a></div>
   <div class="tools">
     <select class="btn" id="jump" aria-label="Jump to slide"></select>
-    <button class="btn" id="timerToggle" aria-label="Show timer" aria-expanded="false" aria-controls="timerPanel" title="Show timer">◷</button>
+    <button class="btn toggle-status" id="timerToggle" aria-label="Show timer" aria-expanded="false" aria-controls="timerPanel" title="Show timer">◷</button>
     <span class="timer-panel" id="timerPanel" hidden>
       <span class="pace" id="pace" title="Time"><b id="clock">00:00</b>/<span id="plan">00:00</span></span>
-      <button class="btn" id="timerBtn" title="Start timer (p)" aria-label="Start timer">▷</button>
+      <button class="btn toggle-status" id="timerBtn" aria-pressed="false" title="Start timer (p)" aria-label="Start timer">▷</button>
     </span>
-    <button class="btn" id="notesBtn" aria-label="Speaker notes" aria-pressed="false" title="Speaker notes (n)">≡</button>
+    <button class="btn toggle-status" id="notesBtn" aria-label="Speaker notes" aria-pressed="false" title="Speaker notes (n)">≡</button>
     <button class="btn" id="pdfBtn" aria-label="Download slides" title="Download slides (d)">⭳</button>
     <button class="btn" id="fsBtn" aria-label="Fullscreen" title="Fullscreen (f)">⛶</button>
-    <button class="btn theme-icon-btn" id="themeSwitch" aria-label="Switch to dark theme" title="Switch theme (t)">☼</button>
-    <button class="btn" id="controlsToggle" aria-label="Hide controls" aria-pressed="false" title="Hide controls (c)">◉</button>
+    <button class="btn theme-icon-btn" id="themeSwitch" aria-label="Switch to dark theme" aria-pressed="false" title="Switch theme (t)">☾</button>
+    <button class="btn toggle-status" id="controlsToggle" aria-label="Hide controls" aria-pressed="false" title="Hide controls (c)">◉</button>
   </div>
 </header>
 
 <div class="viewport" id="viewport">
 <div class="stage" id="stage" data-slide-count="29">
-<section class="slide title-slide" data-min="0.5" data-title="Data-Driven Cyber Defence">
+<section class="slide title-slide" data-min="0.5" data-title="Stories in Data-Driven Cyber Defence">
   <h1>Stories in Data-Driven Cyber Defence</h1>
   <div class="tsub">From Cybersecurity Data Engineering to Adversarial Resilience</div>
   <div class="meta">
@@ -65,34 +67,39 @@
         <li>This session is designed to be interactive, discussion-driven, and participatory.</li>
         <li>Everyone is expected to be involved in both the presentation and the simulation activities.</li>
         <li>Please contribute your perspective, ask questions, and respond to situations as they unfold.</li>
-        <li>We are not here to passively listen — the real learning comes from active participation and shared reasoning.</li>
+        <li>We are not here to passively listen. The real learning comes from active participation and shared reasoning.</li>
+        <li>Keep your mics ready, but muted unless you are talking. Always be ready to contribute/interact. It is fine to talk over people respectfully giving space for everyone's opinions.</li>
       </ul>
     </div>
     <div class="card t">
       <h3>Disclaimer</h3>
       <ul>
         <li>There may be more than one reasonable answer in the scenarios we discuss.</li>
-        <li>The goal is to understand trade-offs, assumptions, and decision-making — not to chase a single “right answer”.</li>
+        <li>The goal is to understand trade-offs, assumptions, and decision-making, and not to chase a single “right answer”.</li>
         <li>Please keep comments respectful, concise, and relevant to the topic being discussed.</li>
         <li>Participation is encouraged and expected; your voice matters in shaping the learning experience.</li>
+        <li>AJ generated content can be controversial and incorrect, like AI generated content. I could be social engineering you, so verify information from multiple sources.</li>
+        <li>I am not here to teach you everything, but to facilitate your learning and exploration.</li>
       </ul>
     </div>
   </div>
   <div class="callout deck-inline-1">
-    <b>Important:</b> Please stay engaged, contribute to the simulation, respond thoughtfully, and help make this a collaborative learning experience for everyone.
+    <b>Important:</b> Please stay engaged, contribute to the simulation, respond thoughtfully, and help make this a collaborative learning experience for everyone. Be here, learn, engage, and enjoy the session.
   </div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>30 sec</h4><ul><li>We want an active room, not a passive audience.</li><li>Everyone should participate in the discussion and simulation.</li></ul></aside>
 </section>
 
 <section class="slide s-navy" data-min="0.5" data-title="Session roadmap">
   <span class="kicker">The session plan today...</span>
   <h2>90 minutes | 3 parts | Interactive | All attention requested</h2>
-  <div class="tl">
-    <div class="deck-inline-2">Introduction and Talk (30 min)<small>We will talk about some ideas, facts, and real cases. We will try to understand the topics.</small></div>
-    <div class="deck-inline-3">Simulation and discussion (50 min)<small>Four stories, two choices each time, interactive and engaging. Requires active participation and quick responses</small></div>
-    <div class="deck-inline-4">QnA (10 min)<small>Open floor.</small></div>
-  </div>
+  <table class="tl">
+    <tr>
+      <td class="deck-inline-2">Introduction and Talk (30 min)<small>We will talk about some ideas, facts, and real cases. We will try to understand the topics.</small></td>
+      <td class="deck-inline-3">Simulation and discussion (50 min)<small>Four stories, two choices each time, interactive and engaging. Requires active participation and quick responses</small></td>
+      <td class="deck-inline-4">Qn'A (10 min)<small>Open floor.Qn'A</small></td>
+    </tr>
+  </table>
   <div class="grid g2 deck-inline-5">
     <div class="card t">
       <h3>After the talk, you will be able to...</h3>
@@ -115,7 +122,7 @@
       </ul>
     </div>
   </div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>30 sec</h4><ul><li>The 50-minute simulation is the main part of the session.</li><li>Two key words slides near the end explain the terms. Slides 20 to 24 are the toolkit for the simulation.</li></ul></aside>
 </section>
 
@@ -134,7 +141,7 @@
     <div class="callout deck-inline-9"><b>48%</b> of breaches involved a third party, such as a supplier. This is 60% more than before.</div>
   </div>
   <p class="sub deck-inline-10">Attackers use AI to work faster and at larger scale. Defenders can only react as fast as their <b>data and decisions</b> allow.</p>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>1 min</h4><ul><li>One main idea: time. If attackers spread in 29 minutes, a queue of people cannot be the only defence.</li><li>AI-enabled breaches cost about $1M more than average. That is the price of falling behind.</li><li>Software weaknesses are now the top way in, but stolen passwords still appear in 39% of breaches.</li></ul></aside>
 </section>
 
@@ -150,7 +157,7 @@
   </div>
   <div class="callout deck-inline-16">The bars use a <b>logarithmic scale</b> (each step is a much bigger jump). There are two speeds: <b>fast criminal attacks</b> that beat any analyst, and <b>slow spy attacks</b> that hide in normal behaviour. Both need good data.</div>
   <div class="src">Sources: Mandiant M-Trends 2026 (hand-off time, dwell time); CrowdStrike Global Threat Report 2026 (spread time).</div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>30 sec</h4><ul><li>Dwell time went up from 11 to 14 days, mostly because of spy cases and North Korean IT-worker cases.</li><li>Fast attacks need automation. Slow attacks need rich data about behaviour. Neither works without good data.</li></ul></aside>
 </section>
 
@@ -176,7 +183,7 @@
       <div class="src"><small>Sources: CrowdStrike Global Threat Report 2026; Mandiant M-Trends 2026 (via Google Cloud blog).</small></div>
     </div>
   </div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>1 min</h4><ul><li>For teachers: teach the whole pipeline, not only the algorithm. Bad data causes quiet failure.</li><li>Ask the room: where in this chain does your own institution/company measure nothing?</li></ul></aside>
 </section>
 
@@ -186,7 +193,7 @@
   <div class="ladder" id="ladder"></div>
   <div class="detail" id="ladderDetail"></div>
   <p class="sub deck-inline-26">Click a step to read more. Use <b>+1</b> to count hands: where is your institution <b>today</b>?</p>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>2.5 min</h4><ul><li>Walk up the steps. Each step asks a different question of the data: what happened, what is happening, what will happen, how do we improve every time.</li><li>Count the hands. Keep the numbers on screen and use them again in the simulation discussion.</li><li>Main point: you cannot skip a step. Prediction on weak data is only a confident guess.</li></ul></aside>
 </section>
 
@@ -198,7 +205,7 @@
     <div class="callout deck-inline-27"><b>Treat data health like device health.</b> Raise an alert when a log source goes quiet, just as you do for a bad process.</div>
     <div class="callout deck-inline-8"><b>Detection as code:</b> keep detections in version control, test them, review them, and link them to MITRE ATT&amp;CK. Measure coverage.</div>
   </div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>1.5 min</h4><ul><li>A common format (OCSF or Elastic Common Schema) lets detections move between tools and lets models learn.</li><li>Scenario C starts with a gap in the data.</li></ul></aside>
 </section>
 
@@ -220,7 +227,7 @@
         <ul><li><b>Baselines</b> show what is normal for each person and group</li><li><b>Risk-based checks</b>: extra checks only when risk is high</li><li><b>Measured training</b>: look at behaviour and reporting, not certificates</li><li><b>Reporting without blame</b> keeps the sensor network alive</li></ul></div>
     </div>
   </div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>1 min</h4><ul><li>Do not use the "careless user" story. Blame stops reporting, and then you lose the data you need.</li><li>This connects to the final scenario, where culture is a data quality problem.</li></ul></aside>
 </section>
 
@@ -238,7 +245,7 @@
     </tbody>
   </table>
   <div class="callout deck-inline-32">Pattern: <b>observe → set a baseline → score → add the right amount of friction → learn</b>. Controls should follow risk, not one rule for everyone.</div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>1 min</h4><ul><li>Pick two rows and explain them. Scenario B depends on the payment fraud row. Scenario C depends on MFA fatigue.</li><li><b>If short on time:</b> Cover only two rows: payment fraud and MFA fatigue.</li></ul></aside>
 </section>
 
@@ -246,13 +253,13 @@
   <span class="kicker">AI + human in the loop</span>
   <h2>Machines for speed, people for consequences</h2>
   <div class="loop" id="loop"></div>
-  <div class="fb">Feedback loop: analyst decisions become labels that tune detections and retrain models</div>
+  <div class="fb">Feedback loop: Outcome → Telemetry → AI triage → Human judgement → Action → Outcome</div>
   <h3 class="deck-inline-33">Autonomy dial: match autonomy to <span class="deck-inline-34">confidence × how easy to undo × size of impact</span></h3>
   <div class="row">
     <div class="deck-inline-35"><div class="dial" id="dial"></div><div class="card deck-inline-36" id="dialInfo"></div></div>
     <div id="dialMeters" class="deck-inline-37"></div>
   </div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>2.5 min</h4><ul><li>Click through the dial. Ask: which level for a student account? For a research professor? For the finance director?</li><li>Automation creep: raising autonomy because analysts are tired, not because the evidence is good.</li></ul></aside>
 </section>
 
@@ -265,7 +272,7 @@
     <div class="out n"><h3>Strong data + AI wins</h3><p>Coverage, context and feedback grow over time. AI makes a strong data base even stronger.</p><div class="lab">Evidence</div><ul><li>IBM: organisations with wide use of security AI and automation had lower breach costs</li></ul><div class="lab">Scenario C</div><p>The Data Advantage</p></div>
   </div>
   <p class="sub deck-inline-38">Final story: <b>Operation Mirage</b>, where all three meet and the defender's own model is attacked.</p>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>30 sec</h4><ul><li>Point to the next three case slides. Each one shows what decided the outcome.</li></ul></aside>
 </section>
 
@@ -289,7 +296,7 @@
     </div>
   </div>
   <div class="src">Sources: Google Project Zero, "From Naptime to Big Sleep" (Oct 2024); Digital Trends report on CVE-2025-6965 (2025).</div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>1 min</h4><ul><li>AI wins when it works early in the attack chain and the organisation can act on the result.</li><li>Link to Scenario A: an alert is useless without context, a decision and a feedback loop.</li></ul></aside>
 </section>
 
@@ -313,7 +320,7 @@
     <div class="callout deck-inline-42">Defender gap: <b>no data about business processes</b> such as payments and approvals. Only data about computers.</div>
   </div>
   <div class="src">Sources: CNN and Hong Kong police reports on Arup; Anthropic, "Disrupting the first reported AI-orchestrated cyber espionage campaign" (Nov 2025); CrowdStrike 2026.</div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>1.5 min</h4><ul><li>At Arup, the defence is process, not detection: a callback through another channel, two-person approval, and controls on new payees.</li><li>Stay factual on GTG-1002. It is Anthropic's own report, and it also notes limits such as AI mistakes.</li><li>Link to Scenario B: most paths lose, and that is the point.</li></ul></aside>
 </section>
 
@@ -330,7 +337,7 @@
     <div class="card t"><h3>What winners share</h3><ul><li>Measured <b>coverage</b> and data quality targets</li><li>Identity, asset and weakness data <b>joined together</b></li><li><b>Levels of autonomy</b>, with a person deciding in unclear cases</li><li>A <b>feedback loop</b> from verdict to detection</li></ul></div>
   </div>
   <div class="src">Sources: IBM Cost of a Data Breach Report 2026 (newsroom, 29 July 2026); eSecurity Planet summary.</div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>1 min</h4><ul><li>Encourage healthy doubt. A benchmark is not a forecast for your campus.</li><li>Scenario C adds a twist: a strong data platform can still be wasted by weak decisions.</li></ul></aside>
 </section>
 
@@ -348,7 +355,7 @@
     </tbody>
   </table>
   <div class="callout deck-inline-46">Useful frameworks: <b>MITRE ATLAS</b>, <b>NIST AI 100-2</b> (adversarial machine learning), <b>NIST AI RMF</b>, <b>OWASP Top 10 for LLM applications</b>.</div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>1 min</h4><ul><li>Main idea: a model is an asset that can be attacked. Give it a threat model, like any other asset.</li><li>Checkpoint 3 of the final story is baseline poisoning.</li></ul></aside>
 </section>
 
@@ -363,7 +370,7 @@
     <div class="layer deck-inline-52"><div class="lh">Governance</div><div class="lb2">Inventory of models, audit trails, resilience metrics, and red-team tests of AI parts before and after launch.</div></div>
   </div>
   <div class="callout deck-inline-53"><b>Test question:</b> if an attacker controlled 5% of your training data, or hid instructions in an email your AI assistant reads, what would break first? Who would notice?</div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>1 min</h4><ul><li>Defence in depth works for AI in the same way as for networks.</li><li>Ask the teachers which layer is missing most in their courses.</li><li><b>If short on time:</b> Read only the five layer names, then the test question.</li></ul></aside>
 </section>
 
@@ -388,7 +395,7 @@
     <div class="card deck-inline-9"><b>Automation safety</b><span>Automatic actions that people reversed or overrode</span></div>
     <div class="card deck-inline-8"><b>Resilience</b><span>Results under red-team and tabletop pressure</span></div>
   </div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>30 sec</h4><ul><li>This is the goal. The best endings in the simulation all have a closed feedback loop.</li></ul></aside>
 </section>
 
@@ -400,12 +407,12 @@
     <div class="card cn"><h3>Datasets: use with care</h3><ul><li>CIC-IDS2017 and UNSW-NB15 are useful, but old and synthetic</li><li>Teach data leakage, base rates, concept drift and time-based splits</li><li>Add real incident reports for context</li></ul></div>
     <div class="card cg"><h3>Assess judgement</h3><ul><li>Grade reasoning under uncertainty, not only accuracy</li><li>Use branching scenarios like today's, with a short trade-off write-up</li><li>Include ethics: autonomy, privacy, responsibility</li></ul></div>
   </div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
-  <aside class="n"><h4>30 sec</h4><ul><li>Offer to share the simulation file. It is one HTML file, works offline, and can be changed.</li></ul></aside>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <aside class="n"><h4>30 sec</h4></aside>
 </section>
 
 <section class="slide s-navy" data-min="2" data-title="Toolkit 1: Read an alert">
-  <span class="kicker">Simulation toolkit · 1 of 5</span>
+  <span class="kicker">Simulation toolkit · 1 of 6</span>
   <h2>Read an alert: score, threshold and two kinds of mistake</h2>
   <div class="row grow">
     <div class="deck-inline-40">
@@ -429,12 +436,12 @@
       </div>
     </div>
   </div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>2 min</h4><ul><li>Say it plainly: there is no perfect line. Move the slider slowly. Low line: no attack is missed, but analysts must check many false alarms. High line: few alerts, but attacks get through.</li><li>Ask the room: which mistake costs more at your institution, a false alarm or a missed attack?</li><li>Link to the simulation: in Scenario A the score is 0.91, and the good move is still to add context. In Scenario C, missing data makes the score too low.</li><li>The 100 events are made-up numbers for teaching. They are not real data.</li></ul></aside>
 </section>
 
 <section class="slide s-maroon" data-min="2" data-title="Toolkit 2: Attack patterns you will meet">
-  <span class="kicker">Simulation toolkit · 2 of 5</span>
+  <span class="kicker">Simulation toolkit · 2 of 6</span>
   <h2>Seven patterns you will meet in the simulation</h2>
   <table class="t deck-inline-67">
     <thead><tr><th class="deck-inline-68">Pattern</th><th class="deck-inline-45">Clue in the data</th><th>Good first move</th></tr></thead>
@@ -448,13 +455,12 @@
       <tr><td>Baseline poisoning <span class="tag p">D</span></td><td>"Normal" moves slowly. The drift monitor jumps</td><td>Stop baseline updates. Compare with a trusted copy</td></tr>
     </tbody>
   </table>
-  <div class="callout deck-inline-69">The letter shows which scenario uses the pattern. You do not need to remember every row. The <b>key words slides</b> near the end explain the terms.</div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
-  <aside class="n"><h4>2 min</h4><ul><li>Do not read every row. Pick the three that match what faculty already know, then point to the new ones: beacon, MFA fatigue and baseline poisoning.</li><li>Beacon: malware "calls home" at regular times. Regular timing is the clue, because people are not that regular.</li><li>Password spray: the attacker tries a few common passwords on many accounts, so no single account shows many failures.</li><li>MFA fatigue: the attacker sends many approval requests, hoping a tired user taps "approve".</li><li>Poisoning: the attacker changes the data the model learns from, so the model learns that bad is normal.</li></ul></aside>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <aside class="n"><h4>2 min</h4><ul><li>Do not read every row. Pick the three that match what faculty already know, then point to the new ones: beacon, MFA fatigue and baseline poisoning.</li><li>Beacon: malware "calls home" at regular times. Regular timing is the clue, because people are not that regular.</li><li>Password spray: the attacker tries a few common passwords on many accounts, so no single account shows many failures.</li><li>MFA fatigue: the attacker sends many approval requests, hoping a tired user taps "approve".</li><li>Poisoning: the attacker changes the data the model learns from, so the model learns that bad is normal.</li><li>The letter shows which scenario uses the pattern. You do not need to remember every row. The <b>key words slides</b> near the end explain the terms.</li></ul></aside>
 </section>
 
 <section class="slide s-green" data-min="1.5" data-title="Toolkit 3: Context and how wide to contain">
-  <span class="kicker">Simulation toolkit · 3 of 5</span>
+  <span class="kicker">Simulation toolkit · 3 of 6</span>
   <h2>Before you act: get context, then choose how wide to contain</h2>
   <div class="row grow">
     <div class="deck-inline-70">
@@ -477,19 +483,26 @@
       <div id="scopeMeters" class="deck-inline-73"></div>
     </div>
   </div>
-  <h3 class="deck-inline-74">Where you will see this in the simulation</h3>
-  <div class="grid g3 deck-inline-75">
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <aside class="n"><h4>1.5 min</h4><ul><li>Context turns a score into a decision. This is the main skill in Scenario A (first checkpoint) and Scenario C.</li><li>Click through the three scopes. Ask: which scope would you choose for a student laptop? For a finance director's account?</li><li>Key point: most modern attacks use valid logins. Isolating a computer does not cancel a stolen token. That is why "reset everything" wins in Scenario A.</li><li>The meter values are examples for discussion, not measurements.</li></ul></aside>
+</section>
+
+<section class="slide s-green" data-min="1" data-title="Where you will see this in the simulation">
+  <span class="kicker">Simulation toolkit · 4 of 6</span>
+  <h2>Where you will see this in the simulation</h2>
+  <div class="grid g3 deck-inline-75" style="margin-top:18px;">
     <div class="card deck-inline-76"><span class="tag g">Scenario A</span><p class="deck-inline-77">Isolating one computer did not stop a <b>stolen token</b>. Contain the <b>identity</b>.</p></div>
     <div class="card deck-inline-76"><span class="tag n">Scenario C</span><p class="deck-inline-77">Extra checks for the <b>three affected accounts</b> beat a campus-wide password reset.</p></div>
     <div class="card deck-inline-76"><span class="tag m">Scenario B</span><p class="deck-inline-77">A <b>second approver</b> stopped the payment, even though the first person was convinced.</p></div>
   </div>
-  <div class="callout deck-inline-78"><b>Rule of thumb:</b> look wide, then act on the smallest scope that stops the attacker. Contain <b>identities</b>, not only computers.</div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
-  <aside class="n"><h4>1.5 min</h4><ul><li>Context turns a score into a decision. This is the main skill in Scenario A (first checkpoint) and Scenario C.</li><li>Click through the three scopes. Ask: which scope would you choose for a student laptop? For a finance director's account?</li><li>Key point: most modern attacks use valid logins. Isolating a computer does not cancel a stolen token. That is why "reset everything" wins in Scenario A.</li><li>The meter values are examples for discussion, not measurements.</li></ul></aside>
+  <div class="callout deck-inline-78" style="margin-top:24px;"><b>As a general rule, always try:</b> look wide, then act on the smallest scope that stops the attacker.</div>
+  <div class="callout deck-inline-78" style="margin-top:24px;">Contain <b>identities</b>, not only computers.</div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <aside class="n"><h4>1 min</h4><ul><li>Use this as a quick recap before the group starts making choices.</li><li>Reinforce the key lesson: most attacks move through valid accounts and trusted paths, not just infected machines.</li></ul></aside>
 </section>
 
 <section class="slide s-orange" data-min="1.5" data-title="Toolkit 4: Decision checklist and meters">
-  <span class="kicker">Simulation toolkit · 4 of 5</span>
+  <span class="kicker">Simulation toolkit · 5 of 6</span>
   <h2>Five questions to ask, four meters to watch</h2>
   <div class="row grow">
     <div class="deck-inline-79">
@@ -511,12 +524,12 @@
     </div>
   </div>
   <div class="callout deck-inline-82"><b>How the story ends:</b> the ending depends on the <b>average of the four meters</b>. Speed without trust loses. Trust without visibility loses too. Questions 1 to 3 also tell you the right level on the autonomy dial.</div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>1.5 min</h4><ul><li>This is the one slide to leave on the screen when the simulation starts, or print it for each table.</li><li>Link to slide 11: questions 1 to 3 choose the level on the autonomy dial (suggest, approve, act then review, full auto).</li><li>After each choice, the simulation shows the changes to the meters and a short lesson. Neither option is free: the "best" choice still has a cost.</li><li>If time is short: read only the five bold questions.</li></ul></aside>
 </section>
 
 <section class="slide s-purple" data-min="2" data-title="Toolkit 5: Practice checkpoint">
-  <span class="kicker">Simulation toolkit · 5 of 5</span>
+  <span class="kicker">Simulation toolkit · 6 of 6</span>
   <h2>Practice checkpoint: try one decision now</h2>
   <div class="row grow">
     <div class="deck-inline-39">
@@ -535,7 +548,7 @@
       <div class="card deck-inline-87" id="pcResult"><p class="sub deck-inline-88">Choose A or B to see what happens. You can try both.</p></div>
     </div>
   </div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>2 min</h4><ul><li>Run it exactly like the simulation: read the scene, 30 seconds of table talk, vote by hands, click, read the lesson.</li><li>Click both options so the room sees that neither is free. A: fast, but costs trust. B: slower, but gives evidence.</li><li>Change the facts and vote again: what if this were the finance director's account, and the success came from another country? Most people move toward A. That is the checklist at work (questions 1, 3 and 4).</li><li>Then say: "Scenario A starts in the same way. Good luck."</li></ul></aside>
 </section>
 
@@ -555,8 +568,7 @@
         <tr><td class="deck-inline-90"><b>8 min</b></td><td>Discussion across all stories</td></tr>
       </table></div>
   </div>
-  <div class="callout deck-inline-91"><b>Facilitator mode:</b> open <a href="facilitator.html">facilitator.html</a> on the shared screen and let groups vote by raising hands. <b>Individual mode:</b> each person opens <a href="individual.html">individual.html</a> on their own device.</div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>1 min</h4><ul><li>Open facilitator.html on the shared screen or share individual.html with participants. Suggest table groups of 4–6 with roles: security lead, data engineer, CISO, business owner.</li></ul></aside>
 </section>
 
@@ -583,7 +595,7 @@
       <li><b>Breakout time:</b> time from first access to spreading to another system</li>
     </ul>
   </div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>Reference</h4><ul><li>Leave this slide up if participants ask about a word.</li></ul></aside>
 </section>
 
@@ -610,13 +622,13 @@
       <li><b>Human in the loop:</b> a person checks or approves the AI's work</li>
     </ul>
   </div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>Reference</h4><ul><li>Leave this slide up if participants ask about a word.</li></ul></aside>
 </section>
 
 <section class="slide s-navy" data-min="0" data-title="Sources and verification">
   <span class="kicker">Sources</span>
-  <h2>References and a note on checking</h2>
+  <h2>References that forms the basis for this presentation and the simulation</h2>
   <ol class="ref">
     <li>CrowdStrike, <i>2026 Global Threat Report</i> (Feb 2026): spread time, growth of AI-enabled attackers. crowdstrike.com/en-us/press-releases/2026-crowdstrike-global-threat-report</li>
     <li>IBM, <i>Cost of a Data Breach Report 2026</i> (29 Jul 2026): cost, AI-enabled breaches, AI and automation savings. newsroom.ibm.com</li>
@@ -627,8 +639,8 @@
     <li>CNN, "British engineering giant Arup revealed as $25 million deepfake scam victim" (16 May 2024).</li>
     <li>MITRE ATLAS; NIST AI 100-2 (adversarial machine learning); NIST AI RMF; OWASP Top 10 for LLM Applications.</li>
   </ol>
-  <div class="callout deck-inline-82"><b>Before you present:</b> the statistics were checked on 24 Oct 2026. Please check the original reports before formal citation. Some numbers come from secondary summaries.</div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="callout deck-inline-82"><b>Note:</b> the statistics were checked on 24 Oct 2026. Please check the original reports for accuracy and completeness. Some numbers come from secondary summaries.</div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>Reference</h4><ul><li>Leave on screen during questions if useful.</li></ul></aside>
 </section>
 
@@ -645,7 +657,7 @@
     <div class="deck-inline-39"><h3 id="scLevel" class="deck-inline-93">Pick one option in each row</h3><p class="sub deck-inline-94" id="scMsg"></p></div>
   </div>
   <div class="self-check-progress"><div class="meter"><i id="scBar"></i></div></div>
-  <div class="sfoot"><span>Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
+  <div class="sfoot"><span>Stories in Data-Driven Cyber Defence: From Security Data Engineering to Adversarial Resilience | Anand Jagadeesh (AJ) (anandj.xyz)</span><span class="pg"></span></div>
   <aside class="n"><h4>1 min</h4><ul><li>Ask people to score their own institution quietly, or vote by hands for each row.</li><li>Scores: 5–7 reactive, 8–10 proactive, 11–13 ready for predictive, 14–15 ready for transformative.</li><li>Feedback is usually the weakest row. It is also the one that grows the most over time.</li><li><b>If short on time:</b> Say the five rows and ask for a show of hands on the weakest one. Skip the scoring.</li></ul></aside>
 </section>
 </div>
@@ -658,9 +670,10 @@
   <button class="btn" id="prev" aria-label="Previous slide">‹</button>
   <div class="dots" id="dots"></div>
   <button class="btn" id="next" aria-label="Next slide">›</button>
-  <a class="deck-footer-links" href="facilitator.html">Simulation</a>
+  <a class="btn deck-footer-links" href="facilitator.html" aria-label="Open simulation" title="Open simulation"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h4M8 10v4"/><circle cx="15.5" cy="11" r=".6"/><circle cx="17.5" cy="13" r=".6"/><path d="M17.3 5H6.7a4 4 0 0 0-3.9 3.2l-1.5 7A2.7 2.7 0 0 0 6 17.6l1.4-1.6h9.2l1.4 1.6a2.7 2.7 0 0 0 4.7-2.4l-1.5-7A4 4 0 0 0 17.3 5z"/></svg></a>
 </footer>
 
 <script src="js/deck.js"></script>
+<script src="js/defendasaurus.js"></script>
 </body>
 </html>

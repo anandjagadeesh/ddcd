@@ -43,7 +43,10 @@ a{color:var(--n-t)}
 .btn.theme-btn{width:32px;height:32px;min-width:32px;margin:0;padding:0;border-radius:50%;display:grid;place-items:center;font-size:17px;line-height:1}
 .mode-home-main{max-width:960px;min-height:calc(100vh - 64px);min-height:calc(100svh - 64px);margin:0 auto;padding:clamp(12px,2.4vh,24px) 30px 30px}
 .mode-home-main h1{font-family:var(--heading-font);font-size:1.75em;line-height:1.16;margin:0 0 6px;letter-spacing:-.5px;font-weight:750}
-.mode-home-main .lead{max-width:620px;margin:0;color:var(--muted);font-size:.92em}
+.mode-home-main .lead{max-width:920px;margin:0;color:var(--muted);font-size:.92em}
+.home-shortcuts{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;margin:10px 0 0;color:var(--muted);font-size:.82em}
+.home-shortcuts span{white-space:nowrap}
+.home-shortcuts kbd{padding:1px 5px;border:1px solid var(--line);border-radius:4px;background:var(--surface2);color:var(--text);font-family:var(--mono);font-size:.9em}
 .home-section{margin-top:14px}
 .home-section>h2{font-family:var(--heading-font);font-size:1.1em;margin:0 0 6px;font-weight:750;letter-spacing:-.3px}
 .home-separator{width:100%;height:1px;margin:1.5rem auto;background:currentColor;opacity:.3}
@@ -70,3 +73,6 @@ a{color:var(--n-t)}
   .mode-home-main h1{font-size:1.55em}
   .mode-home-main .lead{font-size:.82em;line-height:1.4}
 }
+
+.top,main{position:relative;z-index:1}
+.top{position:sticky;z-index:30}

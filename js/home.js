@@ -4,7 +4,8 @@
   if(!theme) theme=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
   function applyTheme(value){
     root.setAttribute('data-theme',value);
-    button.textContent=value==='dark'?'☾':'☼';
+    button.textContent=value==='dark'?'☼':'☾';
+    button.setAttribute('aria-pressed',value==='dark'?'true':'false');
     button.setAttribute('aria-label',value==='dark'?'Switch to light theme':'Switch to dark theme');
   }
   applyTheme(theme);

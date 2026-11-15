@@ -311,7 +311,8 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
   /* ---- theme ---- */
   function applyTheme(t){
     root.setAttribute('data-theme',t);
-    $('#themeSwitch').textContent=t==='dark'?'☾':'☼';
+    $('#themeSwitch').textContent=t==='dark'?'☼':'☾';
+    $('#themeSwitch').setAttribute('aria-pressed',t==='dark'?'true':'false');
     $('#themeSwitch').setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');
   }
   var th=lsGet('dd-theme')||((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
@@ -332,6 +333,7 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
       pace.classList.toggle('warn',app.sess.sec<=600&&app.sess.sec>120);
       pace.classList.toggle('crit',app.sess.sec<=120);
       button.textContent=app.sess.run?'Ⅱ':'▷';
+      button.setAttribute('aria-pressed',app.sess.run?'true':'false');
       button.title=(app.sess.run?'Pause':'Start')+' timer (p)';
       button.setAttribute('aria-label',(app.sess.run?'Pause':'Start')+' timer');
       var toggle=$('#timerToggle');
@@ -365,6 +367,7 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
     var e=$('#cptVal'),w=$('#cptBox'),b=$('#cptBtn'); if(!e)return;
     e.textContent=fmt(app.cpt.sec); w.classList.toggle('low',app.cpt.sec<=20);
     b.textContent=app.cpt.run?'Pause':'Start discussion timer';
+    b.setAttribute('aria-pressed',app.cpt.run?'true':'false');
     b.title=(app.cpt.run?'Pause':'Start')+' discussion timer (c)';
   }
   function stopCpt(){clearInterval(app.cpt.t);app.cpt.run=false;}
@@ -446,8 +449,8 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
         '<p class="muted small" style="margin:6px 0 0">Use the 50-minute session timer at the top. Each checkpoint also has a discussion timer.</p></div>'
       :'';
     var shortcutHelp=app.mode==='fac'
-      ?'Shortcuts: 1–4 open a scenario · r restart · t theme · v timer · p start/pause session timer.'
-      :'Shortcuts: 1–4 open a scenario · r restart · t theme · p download practice slides.';
+      ?'Shortcuts: 1–4 open a scenario · r restart · t theme · o Defendasaurus · v timer · p start/pause session timer.'
+      :'Shortcuts: 1–4 open a scenario · r restart · t theme · o Defendasaurus · p download practice slides.';
     return '<section class="hero"><div class="kicker">Data Driven Threat Detection and Resilience</div>'+
       '<h1>Simulations for Data-Driven Cyber Defence</h1>'+
       '<p class="lead">Four branching stories about cyber defence. Your choices change the next scene, the four meters and the ending. '+modeIntro+'</p></section>'+
@@ -480,7 +483,7 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
       }).join('')+'</div>';
       var lock='';
       if(app.mode==='fac'){
-        lock='<div class="lockbar"><div class="tmr" id="cptBox"><b id="cptVal">'+fmt(app.cpt.sec)+'</b><button class="btn" id="cptBtn" data-act="cpt" data-shortcut="c" aria-keyshortcuts="c" title="Start or pause discussion timer (c)">Start discussion timer</button><button class="btn" data-act="cptreset" data-shortcut="x" aria-keyshortcuts="x" title="Reset discussion timer (x)" aria-label="Reset timer">↺</button></div>'+
+        lock='<div class="lockbar"><div class="tmr" id="cptBox"><b id="cptVal">'+fmt(app.cpt.sec)+'</b><button class="btn toggle-status" id="cptBtn" data-act="cpt" data-shortcut="c" aria-keyshortcuts="c" aria-pressed="false" title="Start or pause discussion timer (c)">Start discussion timer</button><button class="btn" data-act="cptreset" data-shortcut="x" aria-keyshortcuts="x" title="Reset discussion timer (x)" aria-label="Reset timer">↺</button></div>'+
           '<div><button class="btn primary big" data-act="lock" data-shortcut="enter" aria-keyshortcuts="Enter" title="Lock in the majority (Enter)" id="lockBtn">Lock in the majority</button> <span class="muted small" id="tally"></span></div></div>'+
           '<p class="muted small key-help">Keys: <span class="kbd">a</span>/<span class="kbd">b</span> vote · <span class="kbd">Shift+a</span>/<span class="kbd">Shift+b</span> remove · <span class="kbd">q</span>/<span class="kbd">w</span> lock · <span class="kbd">Enter</span> majority · <span class="kbd">c</span> timer · <span class="kbd">x</span> reset · <span class="kbd">z</span> clear · <span class="kbd">v</span>/<span class="kbd">p</span> session timer · <span class="kbd">r</span> restart · <span class="kbd">t</span> theme</p>';
       }else{

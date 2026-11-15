@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Open+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/simulation.css">
+<link rel="stylesheet" href="css/toggle_status.css">
+<link rel="stylesheet" href="css/defendasaurus.css">
 </head>
 <body data-mode="fac">
 <header class="top">
@@ -16,16 +18,17 @@
   <a class="btn restart-btn" href="index.html" data-shortcut="r" aria-label="Restart simulation" aria-keyshortcuts="r" title="Restart simulation (r)">↻</a>
   <select class="picker" id="scenarioPicker" aria-label="Choose a scenario" hidden><option value="">Overview</option></select>
   <div class="tools">
-    <button class="btn" id="timerToggle" data-shortcut="v" aria-keyshortcuts="v" aria-label="Show timer" aria-expanded="false" aria-controls="timerPanel" title="Show timer (v)">◷</button>
+    <button class="btn toggle-status" id="timerToggle" data-shortcut="v" aria-keyshortcuts="v" aria-label="Show timer" aria-expanded="false" aria-controls="timerPanel" title="Show timer (v)">◷</button>
     <span class="timer-panel" id="timerPanel" hidden>
       <span class="pace" id="sessPace" title="Session time"><b id="sess">50:00</b>/<span>50:00</span></span>
-      <button class="btn" id="sessToggle" data-shortcut="p" title="Start timer (p)" aria-label="Start timer" aria-keyshortcuts="p">▷</button>
+      <button class="btn toggle-status" id="sessToggle" data-shortcut="p" title="Start timer (p)" aria-label="Start timer" aria-keyshortcuts="p" aria-pressed="false">▷</button>
     </span>
-    <button class="btn theme-btn" id="themeSwitch" data-shortcut="t" aria-keyshortcuts="t" aria-label="Switch to dark theme" title="Switch theme (t)">☼</button>
+    <button class="btn theme-btn" id="themeSwitch" data-shortcut="t" aria-keyshortcuts="t" aria-pressed="false" aria-label="Switch to dark theme" title="Switch theme (t)">☾</button>
   </div>
 </header>
 <main class="wrap simulation-wrap" id="app"></main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="js/simulation.js"></script>
+<script src="js/defendasaurus.js"></script>
 </body>
 </html>

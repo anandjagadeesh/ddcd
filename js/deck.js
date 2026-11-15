@@ -9,7 +9,8 @@
   function applyTheme(t){
     root.setAttribute('data-theme',t);
     var themeButton=document.getElementById('themeSwitch');
-    themeButton.textContent=t==='dark'?'☾':'☼';
+    themeButton.textContent=t==='dark'?'☼':'☾';
+    themeButton.setAttribute('aria-pressed',t==='dark'?'true':'false');
     themeButton.setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');
   }
   var saved=null; try{saved=localStorage.getItem('dd-theme');}catch(e){}
@@ -112,6 +113,7 @@
     if(timerPanel.hidden)revealTimer();
     if(running){elapsed+=(Date.now()-last)/1000;running=false;clearInterval(tick);b.textContent='▷';b.title='Start timer (p)';b.setAttribute('aria-label','Start timer');}
     else{running=true;last=Date.now();tick=setInterval(updateClock,500);b.textContent='Ⅱ';b.title='Pause timer (p)';b.setAttribute('aria-label','Pause timer');}
+    b.setAttribute('aria-pressed',running?'true':'false');
     updateClock();
   }
   document.getElementById('timerBtn').addEventListener('click',toggleTimer);

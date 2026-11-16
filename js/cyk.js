@@ -129,7 +129,7 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
 
 function intro(){
   app.innerHTML='<section class="intro"><h1>Check Your Knowledge (CYK)</h1>'+
-  '<p>Twelve questions on the same ideas as the talk and the simulation. You get an answer and a short reason after every question. This is a practice question set.</p>'+
+  '<p>Twelve questions on the same ideas as the talk and the simulation. You get an answer and a short reason after every question. This is a Check Your Knowledge (CYK) question set.</p>'+
   '<div class="facts"><div class="fact"><b>12</b><span>questions</span></div><div class="fact"><b>~10 min</b><span>to finish</span></div><div class="fact"><b>4</b><span>topics scored</span></div></div>'+
   '<div class="row"><button class="btn" id="go">Start the quiz</button></div>'+
   '<p class="muted" style="margin-top:16px;font-size:14px">Keys: <span class="kbd">1</span>–<span class="kbd">4</span> or <span class="kbd">a</span>–<span class="kbd">d</span> choose an answer, <span class="kbd">h</span> toggle hints, <span class="kbd">s</span> toggle shuffle, <span class="kbd">v</span> show timer, <span class="kbd">r</span> restart, <span class="kbd">o</span> show/hide Defendasaurus, <span class="kbd">Enter</span> next.</p></section>';
@@ -172,7 +172,7 @@ function showQ(){
   var nb=document.getElementById('next');if(nb){nb.onclick=next;nb.focus();}
 }
 function pick(oi){var qi=S.order[S.i];if(S.ans[qi]!==undefined)return;S.ans[qi]=oi;
-  document.dispatchEvent(new CustomEvent('practice-quiz:answer',{detail:{correct:oi===Q[qi].a}}));
+  document.dispatchEvent(new CustomEvent('cyk:answer',{detail:{correct:oi===Q[qi].a}}));
   showQ();}
 function next(){if(S.i+1<S.order.length){S.i++;S.hintShown=false;showQ();window.scrollTo(0,0);}else results();}
 function results(){

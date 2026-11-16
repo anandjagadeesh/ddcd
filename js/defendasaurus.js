@@ -159,7 +159,7 @@
     say(LINES[i][0]);play(LINES[i][1]);
   }
   function schedule(){clearTimeout(idleT);idleT=setTimeout(idle,9000+Math.random()*13000);}
-  if(answerFeedback)document.addEventListener('practice-quiz:answer',function(e){
+  if(answerFeedback)document.addEventListener('cyk:answer',function(e){
     var correct=e.detail&&e.detail.correct;
     say(correct?'Great Job Analyst':'Ouch! Hello!');
     play(correct?'cheer':'squash');

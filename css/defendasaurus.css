@@ -1,21 +1,19 @@
-/* Defendasaurus mascot (js/defendasaurus.js) - shared by every page */
 .pg-wrap{position:fixed;right:18px;bottom:var(--pg-bottom,38px);width:var(--pg-size,84px);aspect-ratio:1;z-index:15;pointer-events:none}
 .pg-wrap.off{display:none}
 .defendasaurus{display:block;width:100%;height:100%;pointer-events:none;overflow:visible;transform-origin:50% 80%;-webkit-user-select:none;user-select:none;
-  --pg-pink:var(--m-t,#8f1d3f);--pg-blue:var(--n-t,#1a3c63);--pg-beak:var(--orange,#df8420)}
+  --pg-pink:var(--m-t);--pg-blue:var(--n-t);--pg-beak:var(--orange)}
 .defendasaurus .pg-bob{pointer-events:auto;cursor:pointer;animation:pg-bob 3s ease-in-out infinite}
 .defendasaurus .pg-pupils{transform-box:fill-box;transform-origin:center;animation:pg-blink 5s infinite}
 .defendasaurus.still .pg-bob,.defendasaurus.still .pg-pupils{animation:none}
 .defendasaurus .pg-pink{fill:var(--pg-pink)}
-.defendasaurus .pg-pink-d{fill:color-mix(in srgb,var(--pg-pink) 78%,#000)}
+.defendasaurus .pg-pink-d{fill:var(--mascot-pink-dark)}
 .defendasaurus .pg-blue{fill:var(--pg-blue)}
-.defendasaurus .pg-blue-d{fill:color-mix(in srgb,var(--pg-blue) 78%,#000)}
+.defendasaurus .pg-blue-d{fill:var(--mascot-blue-dark)}
 .defendasaurus .pg-beak{fill:var(--pg-beak)}
-.defendasaurus .pg-nostril{fill:color-mix(in srgb,var(--pg-beak) 45%,#000)}
+.defendasaurus .pg-nostril{fill:var(--mascot-beak-dark)}
 @keyframes pg-bob{50%{transform:translateY(-3px)}}
 @keyframes pg-blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
 
-/* animations (each one is paired with a line of speech in js/defendasaurus.js) */
 .defendasaurus.pg-vibrate{animation:pg-vibrate .07s linear 14}
 .defendasaurus.pg-hop{animation:pg-hop .7s ease-out}
 .defendasaurus.pg-cheer{animation:pg-cheer 1s ease-out}
@@ -68,24 +66,25 @@
 @keyframes pg-pulse{25%,75%{transform:scale(1.35)}50%{transform:scale(.9)}}
 @keyframes pg-float{30%,70%{transform:translateY(-50px) rotate(6deg)}50%{transform:translateY(-54px) rotate(-6deg)}100%{transform:none}}
 
-/* speech bubble */
-.pg-bubble{position:absolute;right:0;bottom:calc(100% + 4px);width:max-content;max-width:200px;padding:7px 11px;border-radius:12px;background:var(--surface,#fff);color:var(--text,#1e2936);border:1px solid var(--line,#d6dbe2);box-shadow:var(--shadow,0 4px 14px rgba(0,0,0,.15));font:600 13px/1.35 var(--font,Arial,sans-serif);pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s}
-.pg-bubble::after{content:"";position:absolute;right:28px;bottom:-6px;width:10px;height:10px;background:var(--surface,#fff);border:solid var(--line,#d6dbe2);border-width:0 1px 1px 0;transform:rotate(45deg)}
+.pg-bubble{position:absolute;right:0;bottom:calc(100% + 4px);width:max-content;max-width:200px;padding:7px 11px;border-radius:12px;background:var(--surface);color:var(--text);border:1px solid var(--line);box-shadow:var(--shadow);font:600 13px/1.35 var(--font,Arial,sans-serif);pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s}
+.pg-bubble::after{content:"";position:absolute;right:28px;bottom:-6px;width:10px;height:10px;background:var(--surface);border:solid var(--line);border-width:0 1px 1px 0;transform:rotate(45deg)}
 .pg-bubble.show{opacity:1;transform:none}
 
-/* size buttons */
 .pg-ctrl{position:absolute;top:100%;left:50%;transform:translateX(-50%);display:flex;gap:6px;padding-top:2px;pointer-events:auto;visibility:hidden;opacity:0;transition:opacity .2s,visibility 0s .2s}
 .pg-wrap.ctrls .pg-ctrl,.pg-ctrl:focus-within{visibility:visible;opacity:1;transition-delay:0s}
-.pg-btn{width:22px;height:22px;padding:0;border-radius:50%;border:1px solid var(--line,#d6dbe2);background:var(--surface,#fff);color:var(--text,#1e2936);font:700 14px/1 var(--font,Arial,sans-serif);cursor:pointer;box-shadow:var(--shadow,0 2px 6px rgba(0,0,0,.15));display:grid;place-items:center}
-.pg-btn:hover{background:var(--surface2,#f0f2f5)}
-.pg-btn:focus-visible{outline:2px solid var(--primary,var(--n-t,#1a3c63));outline-offset:1px}
+.pg-btn{width:22px;height:22px;padding:0;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--text);font:700 14px/1 var(--font,Arial,sans-serif);cursor:pointer;box-shadow:var(--shadow);display:grid;place-items:center}
+.pg-btn:hover{background:var(--surface2)}
+.pg-btn:focus-visible{outline:2px solid var(--primary,var(--n-t));outline-offset:1px}
 
 
 @media (max-width:600px){.pg-wrap{--pg-size:60px;right:10px}}
 
-/* show / hide button lives in the page header (uses that page's .btn style) */
-.pg-toggle{display:inline-grid;place-items:center;color:var(--text,#1e2936)}
+.pg-toggle{display:inline-grid;place-items:center;color:var(--text)}
 .pg-toggle svg{display:block}
 .pg-toggle.is-off svg{opacity:.4}
 .top>.pg-toggle{margin-left:auto}
 .top>.pg-toggle+#themeSwitch{margin-left:0}
+
+@media print{
+  .pg-wrap,.pg-toggle{display:none!important}
+}

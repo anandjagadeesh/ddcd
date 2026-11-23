@@ -10,7 +10,7 @@ function took(st,node,opt){return st.path.some(function(p){return p.node===node&
 
 var SCENARIOS={
 /* ======================= A ======================= */
-A:{id:'A',title:'The Quiet Beacon',tag:'AI-driven defence wins',color:'green',minutes:9,
+A:{id:'A',title:'The Quiet Beacon',color:'green',minutes:9,
  blurb:'A tool that studies user and network behaviour finds a quiet, regular signal from a research cluster late on Friday night. Do you trust it, check it, or automate the response?',
  goal:'AI defence with a person in the loop: add context, follow the trail, use levels of autonomy, close the feedback loop.',
  setting:'<b>AJ International University</b> has a research cloud with powerful computers (GPU clusters), student services, and a behaviour-analytics tool that has learned from 18 months of data. You are the security lead on call. It is Friday night.',
@@ -80,7 +80,7 @@ A:{id:'A',title:'The Quiet Beacon',tag:'AI-driven defence wins',color:'green',mi
  debrief:['At which checkpoint did you trade speed for evidence? Was it worth it?','Who in your institution owns the limit for automatic action?','What label would you save from this incident, and where would you keep it?']
 },
 /* ======================= B ======================= */
-B:{id:'B',title:'The CFO Call',tag:'AI-powered attacker wins',color:'maroon',minutes:9,
+B:{id:'B',title:'The CFO Call',color:'maroon',minutes:9,
  blurb:'A deepfake CFO, a fake lookalike website and an AI-scaled attack on many channels. Most paths lose. Can you find the narrow save?',
  goal:'Why AI-powered attackers win with personal messages and fake identities, and which process controls still work.',
  setting:'<b>AJ International AB</b> approves supplier payments by email, and uses video calls for senior approval. Its monitoring covers computers and email, but <b>not the payment approval process</b>. The attacker uses AI to write personal messages, copy voices and change tactics live. You play the people in the middle: first a finance officer, then the security lead, then the CISO.',
@@ -149,7 +149,7 @@ B:{id:'B',title:'The CFO Call',tag:'AI-powered attacker wins',color:'maroon',min
  debrief:['Which control in this story did not depend on anyone believing what they saw or heard?','What data about business processes are you missing today?','How would you design a check that a deepfake cannot beat?']
 },
 /* ======================= C ======================= */
-C:{id:'C',title:'The Data Advantage',tag:'Strong data + AI wins',color:'navy',minutes:9,
+C:{id:'C',title:'The Data Advantage',color:'navy',minutes:9,
  blurb:'A mature security data platform and a gap in the data on Monday morning. Will you use the advantage you built?',
  goal:'How data quality, context and feedback grow with AI, and how weak decisions waste them.',
  setting:'<b>AJ International University</b> has spent three years building a security data platform: data in one common format, a graph linking identities, assets and weaknesses, data quality targets, detections written as code, and ML models with human-approved playbooks. This scenario tests whether you use that advantage.',
@@ -215,7 +215,7 @@ C:{id:'C',title:'The Data Advantage',tag:'Strong data + AI wins',color:'navy',mi
  debrief:['Which signal would you have missed without data quality monitoring?','Who approves changes to autonomy limits, and based on what evidence?','Which three metrics would you show to your leaders?']
 },
 /* ======================= D ======================= */
-D:{id:'D',title:'Operation Mirage',tag:'Final story: all three forces',color:'purple',minutes:12,
+D:{id:'D',title:'Operation Mirage',color:'purple',minutes:12,
  blurb:'AI phishing at scale, then an attack on your own detection models. All three lessons in one incident.',
  goal:'Combine people as sensors, safe feedback loops, baseline poisoning and layered resilience.',
  setting:'<b>AJ International University</b>\'s login portal serves 30,000 students and staff. An attacker using AI sends personal phishing at scale, then turns to attack the university\'s own detection models. You lead the response for one week.',
@@ -303,12 +303,8 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
   var root=document.documentElement, $=function(s){return document.querySelector(s);};
   var app={mode:document.body.getAttribute('data-mode')==='ind'?'ind':'fac',view:'home',sid:null,st:null,states:{},phase:'decide',votes:{a:0,b:0},optionOrder:[],last:null,results:{},
            cpt:{sec:120,run:false,t:null},sess:{sec:3000,run:false,t:null}};
-
-  /* ---- persistence helpers ---- */
   function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
   function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
-
-  /* ---- theme ---- */
   function applyTheme(t){
     root.setAttribute('data-theme',t);
     $('#themeSwitch').textContent=t==='dark'?'☼':'☾';
@@ -320,12 +316,9 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
   $('#themeSwitch').addEventListener('click',function(){var t=root.getAttribute('data-theme')==='dark'?'light':'dark';applyTheme(t);lsSet('dd-theme',t);});
 
   document.body.classList.toggle('fac',app.mode==='fac');
-
-  /* ---- toast ---- */
   var toastT=null;
   function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show');},2600);}
 
-  /* ---- timers ---- */
   function fmt(s){s=Math.max(0,Math.round(s));var m=Math.floor(s/60),x=s%60;return (m<10?'0':'')+m+':'+(x<10?'0':'')+x;}
   function updSess(){
       var clock=$('#sess'),pace=$('#sessPace'),button=$('#sessToggle');if(!clock||!pace||!button)return;
@@ -377,7 +370,6 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
     updCpt();
   }
 
-  /* ---- navigation ---- */
   function tabs(){
     var h='<option value="">Overview</option>';
     ORDER.forEach(function(id){
@@ -402,7 +394,6 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
   }
   function home(){stopCpt();app.view='home';render(true);}
 
-  /* ---- views ---- */
   function shuffleOptions(){
     app.optionOrder=getNode(app.st).options.slice();
     for(var i=app.optionOrder.length-1;i>0;i--){
@@ -429,7 +420,7 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
     var cards=ORDER.map(function(id){
       var sc=SCENARIOS[id],r=app.results[id];
       return '<div class="card top-c sc-card c-'+sc.color+'"><div class="row1"><div class="badge">'+id+'</div><div><div class="kicker">'+(id==='D'?'Final story':'Scenario '+id)+'</div><h2 style="margin:0">'+sc.title+'</h2></div></div>'+
-        '<div><span class="chip">'+sc.tag+'</span> <span class="chip ghost">~'+sc.minutes+' min · 4 checkpoints</span></div>'+
+        '<div><span class="chip ghost">~'+sc.minutes+' min · 4 checkpoints</span></div>'+
         '<p style="margin:6px 0 0">'+sc.blurb+'</p><p class="muted small" style="margin:0"><b>Focus:</b> '+sc.goal+'</p>'+
         '<div class="actions"><button class="btn accent" data-act="open" data-sid="'+id+'" data-shortcut="'+(ORDER.indexOf(id)+1)+'" aria-keyshortcuts="'+(ORDER.indexOf(id)+1)+'" title="'+(r?'Replay':'Start')+' scenario '+id+' ('+(ORDER.indexOf(id)+1)+')">'+(r?'Replay':'Start')+' scenario '+id+'</button>'+endChip(r)+'</div></div>';
     }).join('');
@@ -445,7 +436,7 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
       :'Play on your own. Choose each decision directly and review the outcome and path.';
     var sessionPlan=app.mode==='fac'
       ?'<div class="card" style="margin-top:18px"><h2>Plan for 50 minutes</h2><div class="runshow">'+
-        '<div style="flex:3;background:var(--navy)">Brief<small>3 min</small></div><div style="flex:9;background:var(--green)">A<small>9 min</small></div><div style="flex:9;background:var(--maroon)">B<small>9 min</small></div><div style="flex:9;background:var(--orange);color:#1a1205">C<small>9 min</small></div><div style="flex:12;background:var(--purple)">Final story<small>12 min</small></div><div style="flex:8;background:var(--navy)">Debrief<small>8 min</small></div></div>'+
+        '<div style="flex:3;background:var(--chart-navy)">Brief<small>3 min</small></div><div style="flex:9;background:var(--chart-green)">A<small>9 min</small></div><div style="flex:9;background:var(--chart-maroon)">B<small>9 min</small></div><div style="flex:9;background:var(--chart-orange);color:var(--orange-ink)">C<small>9 min</small></div><div style="flex:12;background:var(--chart-purple)">Final story<small>12 min</small></div><div style="flex:8;background:var(--chart-navy)">Debrief<small>8 min</small></div></div>'+
         '<p class="muted small" style="margin:6px 0 0">Use the 50-minute session timer at the top. Each checkpoint also has a discussion timer.</p></div>'
       :'';
     var shortcutHelp=app.mode==='fac'
@@ -462,7 +453,7 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
 
   function playHTML(){
     var sc=SCENARIOS[app.sid],st=app.st,top='';
-    top+='<div class="simulation-page c-'+sc.color+'"><div class="crumb"><span class="chip">'+(sc.id==='D'?'Final story':'Scenario '+sc.id)+'</span><span class="chip o">'+sc.tag+'</span></div>'+
+    top+='<div class="simulation-page c-'+sc.color+'"><div class="crumb"><span class="chip">'+(sc.id==='D'?'Final story':'Scenario '+sc.id)+'</span></div>'+
         '<h1 style="margin:4px 0">'+sc.title+'</h1>';
     if(app.phase==='ending')return top+endingHTML(sc)+'</div>';
     var steps='<div class="steps" aria-label="Progress">';
@@ -491,7 +482,7 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
       }
       return top+steps+meterHTML(st.m,null,false)+setting+scene+think+opts+lock+'</div>';
     }
-    /* result phase */
+
     var L=app.last,o=L.opt,other=L.node.options.filter(function(x){return x.id!==o.id;})[0];
     var delta='<div class="delta">'+METERS.map(function(mt,i){var d=st.m[i]-L.prev.m[i];return d?'<span class="'+(d>0?'pos':'neg')+'">'+mt.n+' '+(d>0?'+':'')+d+'</span>':'';}).join('')+'</div>';
     var next=(st.node===null)?'See the outcome →':'Next checkpoint →';
@@ -601,7 +592,6 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
     if(scroll){$('#app').scrollTop=0;window.scrollTo(0,0);}
   }
 
-  /* ---- voting ---- */
   function updateVotes(){
     var a=app.votes.a,b=app.votes.b;
     ['a','b'].forEach(function(k){var e=$('#vc-'+k);if(e)e.textContent=app.votes[k];var c=$('#oc-'+k);if(c)c.classList.toggle('lead',(k==='a'&&a>b)||(k==='b'&&b>a));});
@@ -619,7 +609,6 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
     return option;
   }
 
-  /* ---- commit a decision ---- */
   function commit(optId){
     stopCpt();
     var prev=app.st,node=getNode(prev),opt=node.options.filter(function(x){return x.id===optId;})[0];
@@ -641,7 +630,6 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
     render(true);
   }
 
-  /* ---- events ---- */
   document.addEventListener('click',function(ev){
     var t=ev.target.closest('[data-act]'); if(!t)return;
     var act=t.getAttribute('data-act');
@@ -678,6 +666,5 @@ function optOf(sid,nodeId,optId){return SCENARIOS[sid].nodes[nodeId].options.fil
     }
   });
 
-  /* ---- init ---- */
   render(false);
 })();

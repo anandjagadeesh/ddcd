@@ -5,7 +5,6 @@
   var viewport=document.getElementById('viewport');
   var N=slides.length, idx=0;
 
-  /* ---------- Theme ---------- */
   function applyTheme(t){
     root.setAttribute('data-theme',t);
     var themeButton=document.getElementById('themeSwitch');
@@ -22,10 +21,8 @@
   }
   document.getElementById('themeSwitch').addEventListener('click',toggleTheme);
 
-  /* ---------- Plan times ---------- */
   var cum=[0]; slides.forEach(function(s,i){cum.push(cum[i]+parseFloat(s.getAttribute('data-min')||'0'));});
 
-  /* ---------- Build nav ---------- */
   var jump=document.getElementById('jump'), dots=document.getElementById('dots');
   slides.forEach(function(s,i){
     var o=document.createElement('option'); o.value=i; o.textContent=(i+1)+'. '+s.getAttribute('data-title'); jump.appendChild(o);
@@ -34,14 +31,12 @@
   });
   jump.addEventListener('change',function(){go(parseInt(jump.value,10));});
 
-  /* ---------- Show ---------- */
   function go(i){
     i=Math.max(0,Math.min(N-1,i)); idx=i;
     slides.forEach(function(s,k){s.classList.toggle('active',k===i);});
     [].forEach.call(dots.children,function(d,k){d.className=k===i?'on':(k<i?'done':'');});
     jump.value=i;
     jump.hidden=slides[i].classList.contains('title-slide');
-    var n=slides[i].querySelector('aside.n'); document.getElementById('notes').innerHTML=n?n.innerHTML:'';
     document.getElementById('plan').textContent=fmt(cum[i]*60);
     try{history.replaceState(null,'','#'+(i+1));}catch(e){}
     updateClock();
@@ -49,7 +44,6 @@
   document.getElementById('next').addEventListener('click',function(){go(idx+1);});
   document.getElementById('prev').addEventListener('click',function(){go(idx-1);});
 
-  /* ---------- Touch navigation ---------- */
   var swipeStart=null;
   viewport.addEventListener('pointerdown',function(e){
     if(e.pointerType!=='touch'||!e.isPrimary)return;
@@ -65,11 +59,9 @@
   });
   document.addEventListener('pointercancel',function(){swipeStart=null;});
 
-  /* ---------- Controls visibility ---------- */
   function toggleControls(){
     var hidden=root.classList.toggle('controls-hidden');
     var b=document.getElementById('controlsToggle');
-    b.textContent=hidden?'○':'◉';
     b.title=(hidden?'Show':'Hide')+' controls (c)';
     b.setAttribute('aria-label',(hidden?'Show':'Hide')+' controls');
     b.setAttribute('aria-pressed',hidden?'true':'false');
@@ -77,7 +69,6 @@
   }
   document.getElementById('controlsToggle').addEventListener('click',toggleControls);
 
-  /* ---------- Scale ---------- */
   function fit(){
     var w=viewport.clientWidth, h=viewport.clientHeight;
     var s=Math.min(w/1280,h/720)*0.985;
@@ -85,7 +76,6 @@
   }
   window.addEventListener('resize',fit); fit();
 
-  /* ---------- Timer ---------- */
   var running=false,elapsed=0,last=0,tick=null;
   var timerPanel=document.getElementById('timerPanel');
   var timerToggle=document.getElementById('timerToggle');
@@ -118,12 +108,10 @@
   }
   document.getElementById('timerBtn').addEventListener('click',toggleTimer);
 
-  /* ---------- Notes / fullscreen ---------- */
-  function toggleNotes(){
-    var n=document.getElementById('notes'),b=document.getElementById('notesBtn');
-    var on=!n.classList.contains('show'); n.classList.toggle('show',on); b.setAttribute('aria-pressed',on?'true':'false');
+  function openNotes(){
+    window.open('speaker-notes.html','speakerNotes','noopener');
   }
-  document.getElementById('notesBtn').addEventListener('click',toggleNotes);
+  document.getElementById('notesBtn').addEventListener('click',openNotes);
   document.getElementById('pdfBtn').addEventListener('click',printDeck);
   function toggleFs(){
     if(!document.fullscreenElement){(root.requestFullscreen||function(){}).call(root);}
@@ -131,7 +119,6 @@
   }
   document.getElementById('fsBtn').addEventListener('click',toggleFs);
 
-  /* ---------- Keyboard ---------- */
   document.addEventListener('keydown',function(e){
     if(e.ctrlKey||e.metaKey||e.altKey)return;
     var tg=e.target&&e.target.tagName;
@@ -141,7 +128,7 @@
     else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'){e.preventDefault();go(idx-1);}
     else if(k===' '&&tg!=='BUTTON'){e.preventDefault();go(idx+1);}
     else if(k==='Home'){go(0);} else if(k==='End'){go(N-1);}
-    else if(k==='n'||k==='N'){toggleNotes();}
+    else if(k==='n'||k==='N'){openNotes();}
     else if(k==='c'||k==='C'){toggleControls();}
     else if(k==='t'||k==='T'){toggleTheme();}
     else if(k==='p'||k==='P'){toggleTimer();}
@@ -149,7 +136,6 @@
     else if(k==='f'||k==='F'){toggleFs();}
   });
 
-  /* ---------- Ladder (slide 6) ---------- */
   var RUNGS=[
     {n:'Step 1',nm:'Reactive',q:'What happened?',c:'--maroon',t:'--m-t',
      data:'Logs kept only for investigation. Tools do not share data. Little context.',cap:'Antivirus, fixing problems after they happen, reviews after incidents.',met:'Time to recover (MTTR); number of incidents closed.',trap:'You learn only after you are hacked.'},
@@ -181,7 +167,6 @@
   }
   renderLadder(document,sel,hands,true);
 
-  /* ---------- Pipeline (slide 7) ---------- */
   var PIPE=[
     ['Collect','Records from computers, logins, network, cloud and SaaS','Are all log sources working? Do they cover all assets?','Blind spots','--navy','--n-t'],
     ['Normalise','Put data in one common format (OCSF or ECS)','Parsing failures; format checks','Detections break without warning','--green','--g-t'],
@@ -195,7 +180,6 @@
     return '<div class="pstep" style="--pc:var('+p[4]+');--pct:var('+p[5]+')"><div class="num">0'+(i+1)+'</div><h3>'+p[0]+'</h3><p>'+p[1]+'</p><div class="gate"><b>Check:</b> '+p[2]+'<br><b>If skipped:</b> '+p[3]+'</div></div>';
   }).join('');
 
-  /* ---------- Self-check (slide 8) ---------- */
   var DIMS=[
     ['Coverage',['Some systems send logs. Gaps unknown','Most systems send logs. Coverage is tracked','Coverage measured against ATT&CK. Gaps become tasks']],
     ['Quality',['Raw data in different formats','Common format. Errors are tracked','Quality targets with automatic alerts']],
@@ -238,7 +222,6 @@
     lv.textContent=out[0]; ms.textContent=out[1];
   }
 
-  /* ---------- HITL loop + autonomy dial (slide 11) ---------- */
   var LOOP=[['Telemetry','Streams of events','--navy','--n-t'],['AI triage','Scores, groups and explains at machine speed','--green','--g-t'],['Human judgement','Context, ethics, business impact','--orange','--o-t'],['Action','SOAR playbooks with levels of autonomy','--maroon','--m-t'],['Outcome','Contained, learned, recorded','--purple','--p-t']];
   document.getElementById('loop').innerHTML=LOOP.map(function(l){return '<div class="nd" style="--lc:var('+l[2]+');--lct:var('+l[3]+')"><b>'+l[0]+'</b>'+l[1]+'</div>';}).join('');
   var DIAL=[
@@ -257,16 +240,15 @@
       d.appendChild(b);
     });
     var x=DIAL[selection];
-    container.querySelector('#dialInfo').innerHTML='<p style="margin:0;font-size:16px"><b>Use when:</b> '+x.use+'</p>';
+    container.querySelector('#dialInfo').innerHTML='<p><b>Use when:</b> '+x.use+'</p>';
     container.querySelector('#dialMeters').innerHTML=
       '<div class="mrow sp"><span>Speed</span><div class="meter"><i style="width:'+x.sp+'%"></i></div></div>'+
       '<div class="mrow rk"><span>Error spread</span><div class="meter"><i style="width:'+x.rk+'%"></i></div></div>'+
       '<div class="mrow ef"><span>Human effort</span><div class="meter"><i style="width:'+x.ef+'%"></i></div></div>'+
-      '<p class="sub" style="font-size:14px;margin-top:8px">Examples to help discussion, not measurements.</p>';
+      '<p class="dial-note">Examples to help discussion, not measurements.</p>';
   }
   renderDial(document,dsel,true);
 
-  /* ---------- Toolkit 1: alert threshold demo ---------- */
   var EV=(function(){
     var out=[97,93,91,88,84,79,72,66,55,41].map(function(s){return {s:s,atk:true};});
     for(var i=0;i<90;i++){var u=((i+1)*0.6180339887)%1; out.push({s:Math.round((0.05+0.80*u*u*u)*100),atk:false});}
@@ -296,7 +278,6 @@
   thRange.addEventListener('input',renderTh);
   renderTh();
 
-  /* ---------- Toolkit 3: containment scope ---------- */
   var SCOPE=[
     {nm:'Host',sub:'Isolate one computer',use:'Quick and simple for one infected computer. But you may stop live work and lose the chance to watch the attacker. Stolen logins still work elsewhere.',st:35,di:55,ev:25},
     {nm:'Identity',sub:'End sessions, reset secrets, extra checks',use:'Stops stolen logins, which most modern attacks use. Usually little disruption, and the logs stay available for investigation.',st:80,di:30,ev:75},
@@ -321,7 +302,6 @@
   }
   renderScope(document,ssel,true);
 
-  /* ---------- Toolkit 5: practice checkpoint ---------- */
   var PC={
     a:{label:'Lock the account now',fx:[0,10,-12,0],
        what:'The account is locked within seconds. The student loses exam access for about 20 minutes until the help desk fixes it. If an attacker was there, they are stopped.',
@@ -405,13 +385,18 @@
     });
 
     var pageLabels=[];
+    var footerLabels=[];
     slides.forEach(function(slide){
       var page=slide.querySelector('.pg');
       if(page)pageLabels.push({element:page,text:page.textContent});
+      var footer=slide.querySelector('.sfoot > span:first-child');
+      if(footer)footerLabels.push({element:footer,text:footer.textContent});
     });
     printSlides.forEach(function(slide,index){
       var page=slide.querySelector('.pg');
       if(page)page.textContent=(index+1)+' / '+printSlides.length;
+      var footer=slide.querySelector('.sfoot > span:first-child');
+      if(footer)footer.textContent=footer.textContent.replace(/\s\|\sAnand Jagadeesh \(AJ\) \(anandj\.xyz\)$/,'');
     });
 
     function cleanup(){
@@ -419,12 +404,12 @@
       printCopies=[];
       slides.forEach(function(slide){slide.classList.remove('print-replaced');});
       pageLabels.forEach(function(label){label.element.textContent=label.text;});
+      footerLabels.forEach(function(label){label.element.textContent=label.text;});
     }
     window.addEventListener('afterprint',cleanup,{once:true});
     window.print();
   }
 
-  /* ---------- Init ---------- */
   var h=parseInt((location.hash||'').replace('#',''),10);
   go(isNaN(h)?0:h-1);
 })();

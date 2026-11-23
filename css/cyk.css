@@ -1,22 +1,6 @@
 :root{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
-
-/* Layout: one centred column, top bar with theme switch, one question per screen, results grouped by topic. */
 :root{
-  color-scheme:light;
-  --bg:#f5f6f8;--surface:#ffffff;--surface2:#f0f2f5;--line:#d6dbe2;--text:#1e2936;--muted:#536171;
-  --navy:#1a3c63;--green:#1f7a4d;--maroon:#8f1d3f;--orange:#df8420;--purple:#5b2c72;
-  --accent:var(--navy);--accent-ink:#ffffff;--good:var(--green);--bad:var(--maroon);--warn:var(--orange);--warn-ink:#5a3004;
-  --good-bg:#e3f2ea;--bad-bg:#f7e4ea;--focus:var(--orange);--top:#ffffff;--shadow:0 4px 14px rgba(26,40,58,.08);
-  --g-t:var(--green);--m-t:var(--maroon);--n-t:var(--navy);--p-t:var(--purple);
   --display:"Montserrat",Arial,sans-serif;--body:"Open Sans",Arial,sans-serif;--mono:monospace;
-}
-:root[data-theme="dark"]{
-  color-scheme:dark;
-  --bg:#111820;--surface:#1b2632;--surface2:#222f3d;--line:#394653;--text:#edf1f5;--muted:#b0bbc7;
-  --g-t:color-mix(in srgb,var(--green) 50%,#fff);--m-t:color-mix(in srgb,var(--maroon) 45%,#fff);
-  --n-t:color-mix(in srgb,var(--navy) 38%,#fff);--p-t:color-mix(in srgb,var(--purple) 45%,#fff);
-  --accent:color-mix(in srgb,var(--navy) 70%,#fff);--accent-ink:#06101c;--good:#5fcf93;--bad:#ee8fab;--warn:#df8420;--warn-ink:#ffd9a8;
-  --good-bg:#14301f;--bad-bg:#3a1824;--focus:#f0a04a;--top:#18222c;--shadow:0 4px 14px rgba(0,0,0,.2)
 }
 *{box-sizing:border-box;scrollbar-width:none;-ms-overflow-style:none}
 *::-webkit-scrollbar{display:none;width:0;height:0}

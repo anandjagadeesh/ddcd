@@ -1,7 +1,6 @@
 (function(){
   var script=document.currentScript;
   function init(){
-  // Install Defendasaurus only after the page has fully loaded.
   if(document.getElementById('pgWrap'))return;
   var defaultVisible=script&&script.dataset.defaultVisible==='true';
   var answerFeedback=script&&script.dataset.answerFeedback==='true';
@@ -22,13 +21,13 @@
       <polygon points="18,34 82,34 78,64 22,64" class="pg-pink"/>
       <polygon points="18,34 30,34 26,64 22,64" class="pg-pink-d"/>
       <g class="pg-face">
-        <circle cx="35" cy="38" r="8" fill="#fff"/>
-        <circle cx="65" cy="38" r="8" fill="#fff"/>
+        <circle cx="35" cy="38" r="8" fill="var(--white)"/>
+        <circle cx="65" cy="38" r="8" fill="var(--white)"/>
         <g class="pg-pupils">
-          <circle cx="35" cy="38" r="4.2" fill="#1e2936"/>
-          <circle cx="65" cy="38" r="4.2" fill="#1e2936"/>
-          <circle cx="36.5" cy="36.2" r="1.3" fill="#fff"/>
-          <circle cx="66.5" cy="36.2" r="1.3" fill="#fff"/>
+          <circle cx="35" cy="38" r="4.2" fill="var(--mascot-eye)"/>
+          <circle cx="65" cy="38" r="4.2" fill="var(--mascot-eye)"/>
+          <circle cx="36.5" cy="36.2" r="1.3" fill="var(--white)"/>
+          <circle cx="66.5" cy="36.2" r="1.3" fill="var(--white)"/>
         </g>
         <polygon points="36,48 64,48 68,58 32,58" class="pg-beak"/>
         <rect x="43" y="51" width="4" height="3" class="pg-nostril"/>
@@ -41,7 +40,6 @@
   <div class="pg-ctrl" role="group" aria-label="Defendasaurus size"><button type="button" class="pg-btn" data-pg="shrink" aria-label="Make Defendasaurus smaller" title="Smaller">&minus;</button><button type="button" class="pg-btn" data-pg="grow" aria-label="Make Defendasaurus bigger" title="Bigger">+</button></div>`;
   document.body.appendChild(wrap);
 
-  // header button (a static black icon) that shows / hides Defendasaurus
   var toggle=document.createElement('button');
   toggle.type='button';toggle.className='btn pg-toggle toggle-status';
   toggle.setAttribute('aria-keyshortcuts','o');
@@ -56,12 +54,11 @@
   var head=root.querySelector('.pg-head'),face=root.querySelector('.pg-face');
   var tx=0,ty=0,cx=0,cy=0,raf=0;
 
-  // --- look toward the mouse ---
   function aim(x,y){
     var r=root.getBoundingClientRect();
     var dx=x-(r.left+r.width/2),dy=y-(r.top+r.height*0.4);
     var d=Math.sqrt(dx*dx+dy*dy)||1;
-    var k=Math.min(1,d/220); // looks fully sideways once the mouse is ~220px away
+    var k=Math.min(1,d/220);
     tx=dx/d*k;ty=dy/d*k;
     if(!raf)raf=requestAnimationFrame(step);
   }
@@ -75,7 +72,6 @@
   document.addEventListener('mouseleave',function(){tx=0;ty=0;if(!raf)raf=requestAnimationFrame(step);});
   if(reduce)root.classList.add('still');
 
-  // --- show / hide ---
   function setVisible(on){
     wrap.classList.toggle('off',!on);
     toggle.classList.toggle('is-off',!on);
@@ -92,7 +88,6 @@
     e.preventDefault();toggle.click();
   });
 
-  // --- size buttons (double-click Defendasaurus to show / hide them) ---
   var MIN=40,MAX=220,STEP=16;
   var size=wrap.getBoundingClientRect().width;
   ctrl.addEventListener('click',function(e){
@@ -101,7 +96,6 @@
     wrap.style.setProperty('--pg-size',size+'px');
   });
 
-  // --- play: every line of speech is paired with the animation that acts it out ---
   var bubble=document.createElement('div');
   bubble.className='pg-bubble';
   bubble.setAttribute('aria-hidden','true');
@@ -140,7 +134,7 @@
   function play(name){
     if(reduce)return;
     if(anim)root.classList.remove(anim);
-    void root.getBoundingClientRect(); // restart the animation
+    void root.getBoundingClientRect();
     anim='pg-'+name;root.classList.add(anim);
   }
   root.addEventListener('animationend',function(e){
@@ -152,7 +146,7 @@
     bubble.classList.add('show');
     clearTimeout(hideT);hideT=setTimeout(function(){bubble.classList.remove('show');},2800);
   }
-  // speak a line and start its animation at the same moment
+
   function perform(){
     var i;do{i=Math.floor(Math.random()*LINES.length);}while(i===last);
     last=i;
@@ -169,10 +163,10 @@
     if(!document.hidden&&!wrap.classList.contains('off')&&!wrap.classList.contains('ctrls'))perform();
     schedule();
   }
-  // single click = animation + callout; double click = show / hide the size buttons
+
   bob.addEventListener('click',function(){
     clearTimeout(clickT);
-    clickT=setTimeout(function(){perform();schedule();},230); // wait to see if it becomes a double click
+    clickT=setTimeout(function(){perform();schedule();},230);
   });
   bob.addEventListener('dblclick',function(e){
     e.preventDefault();

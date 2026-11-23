@@ -1,6 +1,6 @@
 .btn.toggle-status[aria-pressed="true"]:not(.ghost),
 .btn.toggle-status[aria-expanded="true"]:not(.ghost){
-  background:var(--status-on-bg);
+  background:var(--good-bg);
   border-color:var(--g-t);
   color:var(--text);
 }
